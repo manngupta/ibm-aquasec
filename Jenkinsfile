@@ -17,14 +17,14 @@ pipeline {
         }
         stage('Scan App Image') {
             steps {
-                sh label: '', script: 'trivy client --remote http://54.144.250.10:8080 --format template --template @junit.tpl -o app-image.xml thinknyx/devopsinaction:1.0'
+                sh label: '', script: 'trivy client --remote http://54.144.250.10:8080 --format template --template @junit.tpl -o app-image.xml manngupta/devopsinaction:1.0'
                 junit allowEmptyResults: true, testResults: 'app-image.xml'
             }
         }
         stage('Push to DockerHub') {
             steps {
                 input 'Would you like to Procced?'
-                sh label: '', script: 'docker push thinknyx/devopsinaction:1.0'
+                sh label: '', script: 'docker push manngupta/devopsinaction:1.0'
             }
         }
     }
